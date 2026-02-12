@@ -56,6 +56,10 @@ ssh() {
         echo "Warning: no curl or wget, skipping portable-dev bootstrap"
       fi
     fi
-    exec $SHELL -l
+    if command -v tmux >/dev/null 2>&1; then
+      exec tmux new-session -A -s main
+    else
+      exec $SHELL -l
+    fi
   '
 }
